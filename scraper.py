@@ -29,7 +29,7 @@ def fetch_activities():
         return []
 
     results = []
-    target_categories = ["校內活動", "校友會活動"]
+    target_categories = ["校內活動", "校友會活動", "其他事項"]
 
     for cat_name in target_categories:
         start_node = soup.find(lambda tag: tag.name in ['h1', 'h2', 'h3', 'div'] and tag.get_text(strip=True) == cat_name)
@@ -39,7 +39,7 @@ def fetch_activities():
         while current:
             cur_text = current.get_text(strip=True)
             
-            if current.name in ['h1', 'h2'] and any(stop in cur_text for stop in ["校友會活動", "聯絡我們", "最新消息"]) and cur_text != cat_name:
+            if current.name in ['h1', 'h2'] and any(stop in cur_text for stop in ["校友會活動", "聯絡我們", "最新消息", "其他事項"]) and cur_text != cat_name:
                 break
             
             if current.name in ['h3', 'h4', 'strong'] and len(cur_text) > 1:
